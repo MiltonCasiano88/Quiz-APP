@@ -22,10 +22,6 @@ class ViewController: UIViewController {
                         ["2 + 3 = 5", "True"],
                         ["1 - 1 = -1", "False"]]
     
-    questionBank[2][1]
-    
-    questionBank[1]
-    
     var questionNumber = 0
     
     
@@ -34,23 +30,61 @@ class ViewController: UIViewController {
         
         
         
-        updateUI()
+        updateUI()  // calling a function
+        
+        //define
+        //find the number of parameters
+        // mention the return
+        // return the calculation
+        
+        //call the function
+        
     }
-    func updateUI(){
+    
+    @objc func updateUI(){
         
-        questions.text = questionBank[0][0]
+        questions.text = questionBank[questionNumber][0]
+        trueButton.backgroundColor = UIColor.clear
+        falseButton.backgroundColor = UIColor.clear
+
     }
 
 
 
 
-    @IBAction func ButtonPressed(_sender: UIButton){
+    @IBAction func ButtonPressed(_ sender: UIButton) {
         
-        userInput = sender.currentTitle!
         
-        if userInput == AnswerBank {
+        let userInput = sender.currentTitle!
+        
+        
+        
+        
+        if userInput == questionBank[questionNumber][1] {
             
-            sender.backgroundColor = green
+            
+            sender.backgroundColor = UIColor.green
+            
         }
-    }
+    
+        else {
+            
+            sender.backgroundColor = UIColor.red
+        }
+        if questionNumber + 1 < questionBank.count {
+        
+    
+        questionNumber += 1
+        }
+            
+        else {
+            
+            questionNumber = 0
+        }
+
+        Timer.scheduledTimer(timeInterval: 0.4, target: self, selector: #selector(updateUI), userInfo: nil, repeats: true)
+    
 }
+}
+
+
